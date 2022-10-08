@@ -1,0 +1,504 @@
+<html>
+
+
+<style>
+.briefdescription {
+  border: 5px outset lightblue;
+  background-color: lightblue;
+  text-align: left;
+}
+</style>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+
+<style>.italize{
+
+
+text-decoration-style:bold
+
+}
+
+
+
+</style>
+<header><h1><center>MARIE CODE MADE SIMPLE</center></h1>
+  <body>
+
+<p>This page is an attempt to illustrate the use of MARIE commands to solve simple
+   problems,with the hope of aiding the better understanding of MARIE code for the reader .
+   I hope I save you time , so you can spend it understanding concepts that will enlighten you and in turn the rest of the world.
+</p>
+
+
+</header>
+
+<div class="briefdescription">
+
+
+
+  <h2>Here are some commands and descriptions of what they do</h2>
+  <ul>
+    <li> <a href="op.pdf">INPUT</a>-prompt user input</li>
+    <li><a href="op.pdf">OUTPUT</a>-show what is in AC on output screen</li>
+
+<li><a href="op.pdf">LOAD</a>-loads specified element into AC</li>
+<li><a href="op.pdf">STORE</a>-save element in AC to specified location</li>
+
+<li><a href="op.pdf">SKIPCOND</a>-jumps next instruction on specified condition</li>
+</ul>
+<br>
+<p>Find full descriptions and more<a href="op.pdf"> Here</a></p>
+
+
+
+
+
+
+</div>
+
+<div class ="problem_set">
+
+<h3><centre>What you came for</centre></h3>
+
+
+
+<p>Problem 1: <span style = "color:green"> A program to add Two numbers IN memory and display output</span>
+</p><br>
+<code>CLEAR <span style= "color:gray">// clears the AC </span><br>
+  LOAD num1<br>
+       ADD  num2 <br>
+       OUTPUT<span style = "color:gray">//expected output is 9320  </span>  <br>
+       HALT<br>
+       num1,  Dec 234<br>
+       num2,  Dec 9086<br>
+     </code>
+
+<hr>
+<p>Problem 2:<span style = "color:green"> A  program that reads integers from the keyboard until zero is entered and prints out the total number of all positive integers that were entered.</span>
+  <br>
+  <code >
+
+
+    CLEAR<span style = "color:gray">//clears  the AC </span>
+    <br>
+
+    loop, INPUT<span style = "color:gray">// marking where loop should begin</span>
+    <br>
+    Skipcond 400<span style = "color:gray">// if AC =0 SKIP next instruction</span>
+    <br>
+    Jump check<span style = "color:gray">// jump to "check"</span>
+    <br>
+    Jump end<span style = "color:gray">// jump to "end"</span>
+    <br>
+    check, Skipcond 800<span style = "color:gray">// if AC>0 SKIP next instruction</span>
+    <br>
+    Jump loop<span style = "color:gray">// jump to "loop "</span>
+    <br>
+    Load counter<span style = "color:gray">//load the variable <i>counter</i> onnto AC </span>
+    <br>
+    Add one<span style = "color:gray">// add value stored in variable <i>one</i> to <i>counter</i></span>
+    <br>
+
+    Store counter<span style = "color:gray">// store what is in AC IN <i>counter</i></span>
+    <br>
+    Jump loop<span style ="color:gray">// jump to "loop"</span>
+    <br>
+    end, Load counter<span style ="color:gray">// load the variable <i>counter</i></span>
+    <br>
+    Output<span style ="color:gray">// Output what is in AC</span>
+    <br>
+    Halt<span style ="color:gray">// END PROGRAM</span>
+    <br>
+    counter, Dec 0<span style ="color:gray">// declaring and initializing variables </span>
+    <br>
+    one, Dec 1
+    <br>
+
+
+    <figure>
+
+<img src="problem2.jpg"
+
+width=50%
+alt="marie simulator"
+>
+<figcaption>How the simulator should look when running the above program. </figcaption>
+
+
+    </figure>
+
+
+  </code>
+
+<hr>
+
+
+<p>Problem 3: <span style="color:green">A program that reads 10 integers from the keyboard and prints them out in ascending order.<span></p>
+  <br>
+
+
+<div id="" style="overflow:scroll; height:220px;width:50%;background-color:lightgray;text-align:left">
+<code>
+
+
+  LOAD first_address
+  <br>
+  STORE current_memory
+  //iNPUT numbers to sort
+  <br>
+  loopInput, INPUT
+              <br>
+           STOREI current_memory// Storing keyboard input in memory addresss "current_memory"
+           <br>
+          LOAD current_memory// Load memory address "current memory onto AC "
+          <br>
+            ADD One<span id="italize">// TRAVERSING ARRAY</span>
+            <br>
+           STORE current_memory // populating array with Input value
+           <br>
+          STORE last_memory
+  <br>
+          LOAD ctrl
+          <br>
+          SUBT One
+          <br>
+           STORE ctrl
+  <br>
+  SKIPCOND 000// checking if values in array do not exceed 10
+  <br>
+  JUMP loopInput// if values < 10 re take input
+  <br>
+  LOAD total// if values =10 reset control
+  <br>
+  STORE ctrl
+  <br>
+  LOAD first_address
+  <br>
+  STORE current_memory
+  <br>
+  STORE current_small_memory// memory address of smallest value is assumed to be the first address
+  <br>
+  LOADI current_memory// Take value in memory address " current_memory "
+  <br>
+  STORE current_small // Store value in memory address "current_small"
+  <br>
+            //Start sorting
+  <br>
+  loopSort, LOADI current_memory//access value in memory address "current_memory" lets call it x1 fot illustrative purposes
+          <br>
+            SUBT current_small// subt the already set value in "current_small" lets call this variable x2
+            <br>
+            SKIPCOND 000 //x1-x2 is negative if x1 < x2
+            <br>
+            JUMP check
+            <br>
+            LOAD current_small// updating of smallest element in array
+            <br>
+            STORE temp
+            <br>
+            LOADI current_memory
+            <br>
+            STORE current_small
+            <br>
+           LOAD temp
+           <br>
+            STOREI current_memory
+            <br>
+  check,   LOAD current_memory
+  <br>
+           ADD One
+           <br>
+           STORE current_memory// check next element againt last element
+            <br>
+           SUBT last_memory
+           <br>
+           SKIPCOND 400// if last element in array = next element , move to next element +1
+           <br>
+           JUMP loopSort//if last element != next element continue traversing array
+        <br>
+  LOAD current_small_memory<span id ="italize">//set next elemebt +1 = smalllest element in array</span>
+  <br>
+  STORE temp
+  <br>
+  LOAD current_small
+  <br>
+  STOREI current_small_memory
+  <br>
+  LOAD temp
+  <br>
+  ADD One
+  <br>
+  STORE current_small_memory
+  <br>
+  STORE current_memory
+  <br>
+  LOADI current_memory
+  <br>
+  STORE  current_small
+  <br>
+  LOAD ctrl// traversing array
+  <br>
+  SUBT One
+  <br>
+  STORE ctrl
+  <br>
+  SKIPCOND 000
+  <br>
+
+  JUMP loopSort
+  <br>
+
+
+  LOAD total
+  <br>
+  STORE ctrl
+  <br>
+  LOAD first_address
+  <br>
+  STORE current_memory
+  <br>
+  loopPrint, LOADI current_memory// loop To traverse array and output all elements in their order
+  <br>
+             OUTPUT
+             <br>
+            LOAD current_memory
+            <br>
+             ADD One
+             <br>
+            STORE  current_memory
+            <br>
+            LOAD ctrl
+            <br>
+            SUBT One
+            <br>
+            STORE ctrl
+            <br>
+            SKIPCOND 000
+            <br>
+            JUMP loopPrint
+            <br>
+             HALT
+             <br>
+             <br>
+
+
+
+
+
+
+
+
+  One, Dec 1
+  <br>
+  total, Dec 9
+  <br>
+  ctrl, Dec 9
+  <br>
+  current_small, Dec 0
+  <br>
+  first_address, Dec 110
+  <br>
+
+  current_small_memory, Dec 0
+  <br>
+  current_memory, Dec 0
+  <br>
+  temp, Dec 0
+  <br>
+  last_memory, Dec 0
+  <br>
+</code>
+
+</div>
+
+
+
+
+
+
+
+
+<hr>
+
+
+<p>Problem 4: <span style="color:green">A program that reads 20 integers from the keyboard and prints out the smallest.<span></p>
+  <br>
+
+
+<div id="" style="overflow:scroll; height:220px;width:50%;background-color:lightgray;text-align:left">
+<code>
+
+
+
+  LOAD first_address
+  <br>
+  STORE current_memory //iNPUT numbers to sort
+    <br>
+  loopInput, INPUT
+    <br>
+  STOREI current_memory
+    <br>
+  LOAD current_memory
+    <br>
+  ADD One
+    <br>
+  STORE current_memory // populating array with Input value
+    <br>
+  STORE last_memory
+    <br>
+  LOAD ctrl
+    <br>
+  SUBT One
+    <br>
+  STORE ctrl
+    <br>
+  SKIPCOND 400// checking if values in array do not exceed 20
+  <br>
+  JUMP loopInput
+    <br>
+  LOAD total
+    <br>
+  STORE ctrl
+    <br>
+  LOAD first_address
+    <br>
+  STORE current_memory
+    <br>
+  STORE current_small_memory
+    <br>
+  LOADI current_memory
+    <br>
+  STORE current_small
+    <br>
+  //Start sorting
+    <br>
+  Here, LOADI current_memory
+    <br>
+      SUBT current_small
+        <br>
+      Skipcond 000
+        <br>
+      JUMP next
+        <br>
+      JUMP swap
+        <br>
+  next, LOAD current_memory
+    <br>
+      ADD One  <br>
+           STORE current_memory
+             <br>
+      LOAD ctrl
+        <br>
+      SUBT One
+        <br>
+      Store ctrl
+        <br>
+      SKIPCOND 000
+        <br>
+      JUMP endcheck
+        <br>
+        JUMP Here
+          <br>
+
+  swap, LOADI current_memory
+    <br>
+           STORE current_small
+             <br>
+           LOAD ctrl
+             <br>
+            SUBT One
+              <br>
+            STORE ctrl
+              <br>
+           SKIPCOND 000
+             <br>
+           JUMP endcheck
+             <br>
+           JUMP Here
+    <br>
+
+  endcheck,LOAD ctrl
+    <br>
+             SUBT One
+               <br>
+             SKIPCOND 400
+               <br>
+            JUMP Here
+              <br>
+  end,  LOAD current_small
+    <br>
+         OUTPUT
+           <br>
+      HALT
+  <br>
+    <br>
+  One, Dec 1
+    <br>
+  total, Dec 20
+    <br>
+  ctrl, Dec 20
+    <br>
+  current_small, Dec 0
+    <br>
+  first_address, Dec 110
+    <br>
+  current_small_memory, Dec 0
+    <br>
+  current_memory, Dec 0
+    <br>
+  temp, Dec 0
+    <br>
+  last_memory, Dec 0
+  <br>
+
+
+
+</code>
+
+
+
+</div>
+
+<hr>
+
+
+</div>
+</body>
+<section class="footer" style = "background-image:url('use.png') ">
+
+
+
+
+    <footer id ="footer">
+      <div class="socials">
+
+
+  <a href ="https://instagram.com/simphiwe0007?utm_medium=copy_link"><i class = "fab fa-instagram"></i> </a>
+    <a href ="https://twitter.com/simphiweMagag15?ref_src=twsrc%5Etfw"><i class = "fab fa-twitter"></i> </a>
+      <a href ="https://linkedin.com/in/magagula-simphiwe-808a00183"><i class = "fab fa-linkedin"></i> </a>
+</div>
+
+
+      <div  class="copyright">
+
+
+        S.M @ 2022
+      </div>
+
+</footer>
+</section>
+
+
+</html>
